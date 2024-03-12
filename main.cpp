@@ -1,90 +1,100 @@
 #include <iostream>
+#include <fstream>
+#include "Helpers/Checker.h"
+#include "Helpers/Generator.h"
+#include "Sorters/QuickSort.h"
+#include "Sorters/InsertSort.h"
+#include "Sorters/HeapSort.h"
+
+using namespace std;
+int menu();
+void simulate();
+
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+//    int choice = menu();
+    int choice = 1;
+
+    if(choice == 1){
+        simulate();
+    } else if(choice == 2){
+        cout << "Testowanie\n";
+    }
+
     return 0;
 }
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
 
-### C++ template
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+void simulate(){
+    // deklarujemy testowane wielkości tablic
+//    int sizes [7] = {10000, 20000, 50000, 100000, 200000, 400000, 500000};
+    int sizes [7] = {100, 200, 500, 1000, 2000, 4000, 5000};
+    double avgTimeQuickSortArr [7];
+    int min = 0;
+    int max = 100;
+    int iterations = 100;
 
-# Precompiled Headers
-*.gch
-*.pch
+    Generator generator;
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
 
-# Fortran module files
-*.mod
+//    for(int i = 0; i < 7; i++){
+        int* arr = generator.generateRandomArray(10, min, max);
+        HeapSort heapSort(arr, 10);
+        avgTimeQuickSortArr[0] = heapSort.getAverageTime(iterations);
+//    }
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+    for(int i = 0; i < 7; i++){
+        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
+    }
 
-# Executables
-*.exe
-*.out
-*.app
+//    for(int i = 0; i < 7; i++){
+//        int* arr = generator.generateRandomArray(sizes[i], min, max);
+//        QuickSort quickSort(arr, sizes[i]);
+//        avgTimeQuickSortArr[i] = quickSort.getAverageTime(iterations);
+//    }
+//
+//    for(int i = 0; i < 7; i++){
+//        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
+//    }
+//
+//    for(int i = 0; i < 7; i++){
+//        int* arr = generator.generateRandomArray(sizes[i], min, max);
+//        InsertSort insertSort(arr, 10);
+//        avgTimeQuickSortArr[i] = insertSort.getAverageTime(iterations);
+//    }
+//    for(int i = 0; i < 7; i++){
+//        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
+//    }
+}
 
-### JetBrains template
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
-# User-specific stuff:
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
+int menu ()
+{
+    char choice;
 
-# Sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/dataSources.local.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
+    do {
+        cout << "1. Symulacja 1\n";
+        cout << "2. Testowanie 2\n";
+        cout << "3. Exit\n";
+        cout << "Wybierz: ";
 
-# Gradle:
-.idea/gradle.xml
-.idea/libraries
+        choice = getchar();
 
-# Mongo Explorer plugin:
-.idea/mongoSettings.xml
+        while (getchar() != '\n');
 
-## File-based project format:
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-        com_crashlytics_export_strings.xml
-        crashlytics.properties
-        crashlytics-build.properties
-        fabric.properties
+        switch (choice) {
+            case '1':
+                return 1;
+                break;
+            case '2':
+                return 2;
+                break;
+            case '3':
+                cout << "Wyjscie...\n";
+                break;
+            default:
+                cout << "Zly wybor\n";
+                break;
+        }
+    } while (choice != '3');
+}

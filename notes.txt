@@ -1,0 +1,10 @@
+generowanie zbioru danych o danej wielkosci
+
+sortowanie 1
+sortowanie 2
+.
+.
+.
+sortowanie n
+
+min 10 000 n
