@@ -12,6 +12,7 @@ private:
     int *TempArr;
     int size;
     void displayData();
+    void heapify(int N, int i);
 public:
     HeapSort(int *arr, int size) {
         this->arr = arr;

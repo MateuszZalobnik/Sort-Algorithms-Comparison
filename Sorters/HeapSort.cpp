@@ -1,51 +1,50 @@
 
+#include <iomanip>
 #include "HeapSort.h"
 
-void HeapSort::sort() {
-    int j, k, x;
-    for (int i = 1; i <= size; i++) {
-        j = i;
-        k = j / 2;
-        x = TempArr[i];
-        int test = TempArr[j];
-        int test2 = TempArr[k];
-        while ((k > 0) && (TempArr[k] < x)) {
-            TempArr[j] = TempArr[k];
-            j = k;
-            k = j / 2;
-        }
-        TempArr[j] = x;
-    }
-    displayData();
+void HeapSort::heapify(int N, int i) {
 
-    int m;
-    for(int i = size; i > 0; i--)
-    {
-        swap(TempArr[1], TempArr[i]);
-        j = 1; k = 2;
-        while(k < i)
-        {
-            if((k + 1 < i) && (TempArr[k + 1] > TempArr[k]))
-                m = k + 1;
-            else
-                m = k;
-            if(TempArr[m] <= TempArr[j]) break;
-            swap(TempArr[j], TempArr[m]);
-            j = m; k = j + j;
-        }
+    // sprawdzamy czy lewy i prawy element są większe od korzenia
+    int largest = i;
+
+    // lewy element ostatniego poziomu
+    int l = 2 * i + 1;
+
+    // prawy element ostatniego poziomu
+    int r = 2 * i + 2;
+
+    // jezeli nie wyszlo poza zakres i lewy element jest wiekszy od korzenia
+    if (l < N && TempArr[l] > TempArr[largest])
+        largest = l;
+
+    // jezeli nie wyszlo poza zakres i prawy element jest wiekszy od korzenia
+    if (r < N && TempArr[r] > TempArr[largest])
+        largest = r;
+
+    // jezel korzen nie jest najwiekszy
+    if (largest != i) {
+        // zamieniamy miejscami korzen z najwiekszym elementem
+        swap(TempArr[i], TempArr[largest]);
+
+        // sprawdzamy czy zamiana nie zepsuła kopca i naprawiamy
+        heapify(N, largest);
     }
-    displayData();
-//    x = (size + 1) / 2; k = 2;
-//    for(int i = 1; i <= size; i++)
-//    {
-//        for(j = 1; j <= x - 1; j++) cout << " ";
-//        cout << TempArr[i];
-//        for(j = 1; j <= x; j++) cout << " ";
-//        if(i + 1 == k)
-//        {
-//            k += k; x /= 2; cout << endl;
-//        }
-//    }
+}
+
+void HeapSort::sort() {
+    // budujemy kopiec od ostatniego elementu (zlozonego z korzenia i dwoch lisci) do pierwszego
+    for (int i = size / 2 - 1; i >= 0; i--){
+        heapify(size, i);
+    }
+
+    // sortujemy kopiec
+    for (int i = size - 1; i > 0; i--) {
+        // przesuwamy korzen na koniec
+        swap(TempArr[0], TempArr[i]);
+        // naprawiamy kopiec pomijajac ostatni (posortowny) element
+        // naprwaiamy od korzenia co gwarantuje ze kopiec bedzie znowu kopcem
+        heapify(i, 0);
+    }
 }
 
 
@@ -59,7 +58,6 @@ double HeapSort::getAverageTime(int iterations) {
         for (int l = 0; l < size; l++) {
             TempArr[l] = arr[l];
         }
-        displayData();
 
         counter.StartCounter();
         this->sort();
@@ -68,7 +66,6 @@ double HeapSort::getAverageTime(int iterations) {
             return -1;
         }
     }
-    displayData();
     return sum / iterations;
 }
 
