@@ -5,6 +5,7 @@
 #include "Sorters/InsertSort.h"
 #include "Sorters/HeapSort.h"
 #include "Sorters/QuickSort.h"
+#include "Sorters/ShellSort.h"
 
 using namespace std;
 int menu();
@@ -27,8 +28,8 @@ int main() {
 
 void simulate(){
     // deklarujemy testowane wielkości tablic
-    int sizes [7] = {10000, 20000, 50000, 100000, 200000, 400000, 500000};
-//    int sizes [7] = {100, 200, 500, 1000, 2000, 4000, 5000};
+//    int sizes [7] = {10000, 20000, 50000, 100000, 200000, 400000, 500000};
+    int sizes [7] = {100, 200, 500, 1000, 2000, 4000, 5000};
     double avgTimeQuickSortArr [7];
     int min = 0;
     int max = 100;
@@ -36,20 +37,31 @@ void simulate(){
 
     Generator generator;
 
-        for(int i = 0; i < 7; i++){
+
+            for(int i = 0; i < 7; i++){
         int* arr = generator.generateRandomArray(sizes[i], min, max);
-        QuickSort quickSort(arr, sizes[i]);
-        avgTimeQuickSortArr[i] = quickSort.getAverageTimeByRightPivot(iterations);
+        ShellSort quickSort(arr, sizes[i], ShellSort::SHELL);
+        avgTimeQuickSortArr[i] = quickSort.getAverageTime(iterations);
     }
 
     for(int i = 0; i < 7; i++){
         cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
     }
 
+//        for(int i = 0; i < 7; i++){
+//        int* arr = generator.generateRandomArray(sizes[i], min, max);
+//        QuickSort quickSort(arr, sizes[i], QuickSort::RANDOM);
+//        avgTimeQuickSortArr[i] = quickSort.getAverageTime(iterations);
+//    }
+//
+//    for(int i = 0; i < 7; i++){
+//        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
+//    }
+
 //    for(int i = 0; i < 7; i++){
 //        int* arr = generator.generateRandomArray(sizes[i], min, max);
 //        HeapSort heapSort(arr, sizes[i]);
-//        avgTimeQuickSortArr[i] = heapSort.getAverageTimeByRightPivot(iterations);
+//        avgTimeQuickSortArr[i] = heapSort.getAverageTime(iterations);
 //    }
 //
 //
@@ -61,7 +73,7 @@ void simulate(){
 //    for(int i = 0; i < 7; i++){
 //        int* arr = generator.generateRandomArray(sizes[i], min, max);
 //        InsertSort insertSort(arr, 10);
-//        avgTimeQuickSortArr[i] = insertSort.getAverageTimeByRightPivot(iterations);
+//        avgTimeQuickSortArr[i] = insertSort.getAverageTime(iterations);
 //    }
 //    for(int i = 0; i < 7; i++){
 //        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";

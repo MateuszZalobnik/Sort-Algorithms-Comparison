@@ -1,19 +1,29 @@
-#ifndef AIZO1_INSERTSORT_H
-#define AIZO1_INSERTSORT_H
+#ifndef AIZO1_SHELLSORT_H
+#define AIZO1_SHELLSORT_H
 
 #include <iostream>
+#include <cmath>
 #include "../Helpers/Counter.h"
 #include "../Helpers/Checker.h"
+
 using namespace std;
 
-class InsertSort {
+class ShellSort {
+public:
+    enum GapType {
+        SHELL,
+        HIBBARD,
+    };
 private:
+    enum GapType gapType;
     int *arr;
     int *TempArr;
     int size;
     void displayData();
+    void insertSortWithGap(int gap);
 public:
-    InsertSort(int *arr, int size) {
+    ShellSort(int *arr, int size, GapType gapType) {
+        this->gapType = gapType;
         this->arr = arr;
         this->size = size;
         TempArr = new int[size];
@@ -27,4 +37,4 @@ public:
 };
 
 
-#endif //AIZO1_INSERTSORT_H
+#endif //AIZO1_SHELLSORT_H

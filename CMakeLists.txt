@@ -15,4 +15,6 @@ add_executable(AiZO1 main.cpp
         Sorters/HeapSort.cpp
         Sorters/HeapSort.h
         Sorters/QuickSort.cpp
-        Sorters/QuickSort.h)
+        Sorters/QuickSort.h
+        Sorters/ShellSort.cpp
+        Sorters/ShellSort.h)
