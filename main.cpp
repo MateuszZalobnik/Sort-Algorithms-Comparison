@@ -2,9 +2,9 @@
 #include <fstream>
 #include "Helpers/Checker.h"
 #include "Helpers/Generator.h"
-#include "Sorters/QuickSort.h"
 #include "Sorters/InsertSort.h"
 #include "Sorters/HeapSort.h"
+#include "Sorters/QuickSort.h"
 
 using namespace std;
 int menu();
@@ -32,17 +32,15 @@ void simulate(){
     double avgTimeQuickSortArr [7];
     int min = 0;
     int max = 100;
-    int iterations = 100;
+    int iterations = 10;
 
     Generator generator;
 
-
-    for(int i = 0; i < 7; i++){
+        for(int i = 0; i < 7; i++){
         int* arr = generator.generateRandomArray(sizes[i], min, max);
-        HeapSort heapSort(arr, sizes[i]);
-        avgTimeQuickSortArr[i] = heapSort.getAverageTime(iterations);
+        QuickSort quickSort(arr, sizes[i]);
+        avgTimeQuickSortArr[i] = quickSort.getAverageTimeByRightPivot(iterations);
     }
-
 
     for(int i = 0; i < 7; i++){
         cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
@@ -50,18 +48,20 @@ void simulate(){
 
 //    for(int i = 0; i < 7; i++){
 //        int* arr = generator.generateRandomArray(sizes[i], min, max);
-//        QuickSort quickSort(arr, sizes[i]);
-//        avgTimeQuickSortArr[i] = quickSort.getAverageTime(iterations);
+//        HeapSort heapSort(arr, sizes[i]);
+//        avgTimeQuickSortArr[i] = heapSort.getAverageTimeByRightPivot(iterations);
 //    }
+//
 //
 //    for(int i = 0; i < 7; i++){
 //        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";
 //    }
+
 //
 //    for(int i = 0; i < 7; i++){
 //        int* arr = generator.generateRandomArray(sizes[i], min, max);
 //        InsertSort insertSort(arr, 10);
-//        avgTimeQuickSortArr[i] = insertSort.getAverageTime(iterations);
+//        avgTimeQuickSortArr[i] = insertSort.getAverageTimeByRightPivot(iterations);
 //    }
 //    for(int i = 0; i < 7; i++){
 //        cout << "Czas dla " << sizes[i] << " elementow: " << avgTimeQuickSortArr[i] << "ms\n";

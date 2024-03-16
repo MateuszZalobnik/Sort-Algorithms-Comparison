@@ -8,11 +8,11 @@ add_executable(AiZO1 main.cpp
         Helpers/Checker.h
         Helpers/Generator.cpp
         Helpers/Generator.h
-        Sorters/QuickSort.cpp
-        Sorters/QuickSort.h
         Helpers/Counter.cpp
         Helpers/Counter.h
         Sorters/InsertSort.cpp
         Sorters/InsertSort.h
         Sorters/HeapSort.cpp
-        Sorters/HeapSort.h)
+        Sorters/HeapSort.h
+        Sorters/QuickSort.cpp
+        Sorters/QuickSort.h)

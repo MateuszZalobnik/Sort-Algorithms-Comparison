@@ -21,7 +21,7 @@ double InsertSort::getAverageTime(int iterations) {
     for (int i = 0; i < iterations; i++) {
         TempArr = new int[size];
         for (int l = 0; l < size; l++) {
-            TempArr[i] = arr[i];
+            TempArr[l] = arr[l];
         }
 
         counter.StartCounter();
