@@ -1,7 +1,7 @@
 #include "Test.h"
 
 
-void Test::displayTable() {
+void Test::displayArray() {
     cout << endl;
     if(length > 20){
         cout << "Za duza tablica\n";
@@ -23,7 +23,7 @@ void Test::checkIsSorted() {
     cout << "Tablica jest posortowana\n";
 }
 
-void Test::generateTable() {
+void Test::generateArr() {
     int min, max;
     cout << endl;
     cout << "Generowanie tablicy";
@@ -44,26 +44,32 @@ void Test::generateTable() {
     cout << "Tablica wygenerowana\n";
 }
 
-void Test::tableFromFile() {
+void Test::arrayFromFile() {
     string name;
     cout << endl;
     cout << "Podaj nazwe pliku: ";
     cin >> name;
 
     string num;
-    ifstream MyReadFile(name);
+    ifstream file;
+    file.open(name.c_str());
 
-    int i = 0;
-    while (getline (MyReadFile, num)) {
-        if(i == 0) {
-            length = stoi(num);
-            arr = new int[length];
-        } else {
-            arr[i-1] = stoi(num);
+    if (file.is_open()) { // Sprawdzenie, czy plik został otwarty poprawnie
+        int i = 0;
+        while (getline (file, num)) {
+            if(i == 0) {
+                length = stoi(num);
+                arr = new int[length];
+            } else {
+                arr[i-1] = stoi(num);
+            }
+            i++;
         }
-        i++;
+        cout << "Tablica wczytana z pliku\n";
+        file.close(); // Zamknięcie pliku
+    } else {
+        std::cerr << "Nie udalo sie otworzyc pliku." << std::endl;
     }
-    cout << "Tablica wczytana z pliku\n";
 }
 
 void Test::menu() {
@@ -87,13 +93,13 @@ void Test::menu() {
 
         switch (choice) {
             case 1:
-                generateTable();
+                generateArr();
                 break;
             case 2:
-                tableFromFile();
+                arrayFromFile();
                 break;
             case 3:
-                displayTable();
+                displayArray();
                 break;
             case 4:
                 sortingMenu();
@@ -125,6 +131,7 @@ void Test::sortingMenu() {
         cout << "7. Sortowanie Shella - n/2^k\n";
         cout << "8. Sortowanie Shella - 2^k - 1\n";
         cout << "9. Wyjdz\n";
+        cout << "Wybierz opcje: ";
         cin >> choice;
 
         if (cin.fail()) {
@@ -138,42 +145,42 @@ void Test::sortingMenu() {
             InsertSort insertSort(arr, length);
             insertSort.sort();
             this->TempArr = insertSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 2) {
             QuickSort quickSort(arr, length, QuickSort::LEFT);
             quickSort.sort();
             this->TempArr = quickSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 3) {
             QuickSort quickSort(arr, length, QuickSort::RIGHT);
             quickSort.sort();
             this->TempArr = quickSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 4) {
             QuickSort quickSort(arr, length, QuickSort::CENTER);
             quickSort.sort();
             this->TempArr = quickSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 5) {
             QuickSort quickSort(arr, length, QuickSort::RANDOM);
             quickSort.sort();
             this->TempArr = quickSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 6) {
             HeapSort heapSort(arr, length);
             heapSort.sort();
             this->TempArr = heapSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 7) {
             ShellSort shellSort(arr, length, ShellSort::SHELL);
             shellSort.sort();
             this->TempArr = shellSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 8) {
             ShellSort shellSort(arr, length, ShellSort::HIBBARD);
             shellSort.sort();
             this->TempArr = shellSort.TempArr;
-            afterSotingMenu();
+            afterSortingMenu();
         } else if (choice == 9) {
             break;
         } else {
@@ -183,7 +190,7 @@ void Test::sortingMenu() {
 
 }
 
-void Test::afterSotingMenu() {
+void Test::afterSortingMenu() {
     int choice;
     do {
         cout << endl;
@@ -202,7 +209,7 @@ void Test::afterSotingMenu() {
 
         switch (choice) {
             case 1:
-                displayTempTable();
+                displayTempArr();
                 break;
             case 2:
                 checkIsSorted();
@@ -216,7 +223,7 @@ void Test::afterSotingMenu() {
     } while (choice != 3);
 }
 
-void Test::displayTempTable() {
+void Test::displayTempArr() {
     cout << endl;
     if(length > 20){
         cout << "Za duza tablica\n";

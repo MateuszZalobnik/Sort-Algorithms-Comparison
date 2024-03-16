@@ -17,7 +17,7 @@ test.menu();
 
 //Simulator simulator;
 //simulator.simulate();
-//simulator.displayTable();
+//simulator.displayArray();
 //    int choice = 1;
 //    if(choice == 1){
 //        simulate();
@@ -31,5 +31,11 @@ test.menu();
 
 int menu ()
 {
-
+    int choice;
+    cout << "1. Symulacja\n";
+    cout << "2. Testowanie\n";
+    cout << "3. Wyjscie\n";
+    cout << "Wybierz opcje: ";
+    cin >> choice;
+    return choice;
 }

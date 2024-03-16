@@ -18,13 +18,13 @@ private:
     int length;
     int *arr;
     int *TempArr;
-    void generateTable();
-    void tableFromFile();
-    void displayTable();
+    void generateArr();
+    void arrayFromFile();
+    void displayArray();
     void checkIsSorted();
     void sortingMenu();
-    void afterSotingMenu();
-    void displayTempTable();
+    void afterSortingMenu();
+    void displayTempArr();
 public:
     Test() {
     }
