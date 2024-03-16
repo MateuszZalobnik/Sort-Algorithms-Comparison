@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(AiZO1 main.cpp
         Helpers/Checker.cpp
         Helpers/Checker.h
-        Helpers/Generator.cpp
-        Helpers/Generator.h
+        Simulator/Generator.cpp
+        Simulator/Generator.h
         Helpers/Counter.cpp
         Helpers/Counter.h
         Sorters/InsertSort.cpp
@@ -17,4 +17,6 @@ add_executable(AiZO1 main.cpp
         Sorters/QuickSort.cpp
         Sorters/QuickSort.h
         Sorters/ShellSort.cpp
-        Sorters/ShellSort.h)
+        Sorters/ShellSort.h
+        Simulator/Simulator.cpp
+        Simulator/Simulator.h)
