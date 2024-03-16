@@ -31,7 +31,10 @@ void HeapSort::heapify(int N, int i) {
     }
 }
 
-void HeapSort::sort() {
+double HeapSort::sort() {
+    Counter counter;
+    counter.StartCounter();
+
     // budujemy kopiec od ostatniego elementu (zlozonego z korzenia i dwoch lisci) do pierwszego
     for (int i = size / 2 - 1; i >= 0; i--){
         heapify(size, i);
@@ -45,28 +48,10 @@ void HeapSort::sort() {
         // naprwaiamy od korzenia co gwarantuje ze kopiec bedzie znowu kopcem
         heapify(i, 0);
     }
-}
 
-
-double HeapSort::getAverageTime(int iterations) {
-    Counter counter;
-    double sum = 0;
-    Checker checker;
-
-    for (int i = 0; i < iterations; i++) {
-        TempArr = new int[size];
-        for (int l = 0; l < size; l++) {
-            TempArr[l] = arr[l];
-        }
-
-        counter.StartCounter();
-        this->sort();
-        sum += counter.GetCounter();
-        if (!checker.IsSorted(TempArr, size)) {
-            return -1;
-        }
-    }
-    return sum / iterations;
+    double time = counter.GetCounter();
+    Checker::IsSorted(TempArr, size);
+    return time;
 }
 
 void HeapSort::displayData() {

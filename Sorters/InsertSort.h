@@ -9,10 +9,10 @@ using namespace std;
 class InsertSort {
 private:
     int *arr;
-    int *TempArr;
     int size;
     void displayData();
 public:
+    int *TempArr;
     InsertSort(int *arr, int size) {
         this->arr = arr;
         this->size = size;
@@ -22,8 +22,7 @@ public:
         }
     }
 
-    double getAverageTime(int iterations);
-    void sort();
+    double sort();
 };
 
 

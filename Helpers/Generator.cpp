@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include "Generator.h"
 
 int *Generator::generateRandomArray(int size, int min, int max) {

@@ -1,6 +1,10 @@
 #include "ShellSort.h"
 
-void ShellSort::sort() {
+double ShellSort::sort() {
+    Counter counter;
+    counter.StartCounter();
+
+
     if(gapType == SHELL){
         // n/2^k
         // O(n^2)
@@ -21,6 +25,9 @@ void ShellSort::sort() {
         }
     }
 
+    double time = counter.GetCounter();
+    Checker::IsSorted(TempArr, size);
+    return time;
 }
 
 void ShellSort::insertSortWithGap(int gap) {
@@ -32,28 +39,6 @@ void ShellSort::insertSortWithGap(int gap) {
         }
         TempArr[j] = temp;
     }
-}
-
-double ShellSort::getAverageTime(int iterations) {
-    Counter counter;
-    double sum = 0;
-    Checker checker;
-//    displayData();
-
-    for (int i = 0; i < iterations; i++) {
-        TempArr = new int[size];
-        for (int l = 0; l < size; l++) {
-            TempArr[l] = arr[l];
-        }
-
-        counter.StartCounter();
-        this->sort();
-        sum += counter.GetCounter();
-        if (!checker.IsSorted(TempArr, size)) {
-            return -1;
-        }
-    }
-    return sum / iterations;
 }
 
 void ShellSort::displayData() {

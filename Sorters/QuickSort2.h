@@ -1,5 +1,5 @@
-#ifndef AIZO1_QUICKSORT_H
-#define AIZO1_QUICKSORT_H
+#ifndef AIZO1_QUICKSORT2_H
+#define AIZO1_QUICKSORT2_H
 
 #include <iostream>
 #include "../Helpers/Counter.h"
@@ -8,7 +8,7 @@
 #include <cstdlib>
 using namespace std;
 
-class QuickSort {
+class QuickSort2 {
 public:
     enum PivotType {
         LEFT, RIGHT, RANDOM, CENTER
@@ -16,13 +16,13 @@ public:
 private:
     enum PivotType pivotType;
     int *arr;
+    int *TempArr;
     int size;
     int partition(int left, int right);
     void quickSort(int left, int right);
     void displayData();
 public:
-    int *TempArr;
-    QuickSort(int *arr, int size, PivotType pivotType) {
+    QuickSort2(int *arr, int size, PivotType pivotType) {
         this->pivotType = pivotType;
         this->arr = arr;
         this->size = size;
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif //AIZO1_QUICKSORT_H
+#endif //AIZO1_QUICKSORT2_H

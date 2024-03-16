@@ -1,7 +1,14 @@
 #include "QuickSort.h"
 
-void QuickSort::sort() {
+double QuickSort::sort() {
+    Counter counter;
+    counter.StartCounter();
+
     quickSort(0, size - 1);
+
+    double time = counter.GetCounter();
+    Checker::IsSorted(TempArr, size);
+    return time;
 }
 
 void QuickSort::quickSort(int left, int right) {
@@ -45,30 +52,6 @@ int QuickSort::partition(int left, int right) {
     // zwaracamy indeks pivotu
     return j;
 }
-
-double QuickSort::getAverageTime(int iterations) {
-    Counter counter;
-    double sum = 0;
-    Checker checker;
-//    displayData();
-
-    for (int i = 0; i < iterations; i++) {
-        TempArr = new int[size];
-        for (int l = 0; l < size; l++) {
-            TempArr[l] = arr[l];
-        }
-
-        counter.StartCounter();
-        this->sort();
-        sum += counter.GetCounter();
-        // sprawdzamy czy tablica jest posortowana
-        if (!checker.IsSorted(TempArr, size)) {
-            return -1;
-        }
-    }
-    return sum / iterations;
-}
-
 
 void QuickSort::displayData() {
     for (int i = 0; i < size; i++) {

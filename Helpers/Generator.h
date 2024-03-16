@@ -1,7 +1,8 @@
-#include <time.h>
+#include <ctime>
+#include <cstdlib>
 
-#ifndef AIZO1_SIMULATOR_H
-#define AIZO1_SIMULATOR_H
+#ifndef AIZO1_GENERATOR_H
+#define AIZO1_GENERATOR_H
 
 
 class Generator {
@@ -22,4 +23,4 @@ public:
 };
 
 
-#endif //AIZO1_SIMULATOR_H
+#endif //AIZO1_GENERATOR_H

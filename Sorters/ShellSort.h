@@ -17,11 +17,11 @@ public:
 private:
     enum GapType gapType;
     int *arr;
-    int *TempArr;
     int size;
     void displayData();
     void insertSortWithGap(int gap);
 public:
+    int *TempArr;
     ShellSort(int *arr, int size, GapType gapType) {
         this->gapType = gapType;
         this->arr = arr;
@@ -31,9 +31,7 @@ public:
             TempArr[l] = arr[l];
         }
     }
-
-    double getAverageTime(int iterations);
-    void sort();
+    double sort();
 };
 
 
