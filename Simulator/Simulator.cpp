@@ -1,47 +1,40 @@
 #include "Simulator.h"
 #include "../Helpers/Generator.h"
-#include "../Sorters/QuickSort2.h"
 
 
 void Simulator::simulate() {
-//    int tab [7] = {7, 6, 5, 4, 3, 2, 1};
-//    QuickSort quickSort(tab, 7, QuickSort::RIGHT);
+    cout << "Symulacja dla tablic float\n";
+    simulateForFloat();
 
-//    return;
+    cout << "Symulacja dla tablic losowych\n";
+    simulateForRandom();
+    displayTable();
 
-    double time;
-    for(int i = 0; i < tableSize; i++) {
+    cout << "Symulacja dla tablic posortowanych rosnaco\n";
+    simulateForAsc();
+    displayTable();
 
+    cout << "Symulacja dla tablic posortowanych malejaco\n";
+    simulateForDesc();
+    displayTable();
+
+    cout << "Symulacja dla tablic czesciowo posortowanych\n";
+    simulateForPartlyOrdered();
+    displayTable();
+}
+
+void Simulator::simulateForAsc() {
+    for (int i = 0; i < tableSize; i++) {
         for (int j = 0; j < iterations; j++) {
-            int *arr = generator.generateRandomArray(sizes[i], min, max);
-//            int *arr = generator.generateAscOrderedArray(sizes[i], min, max);
-//            int *arr = generator.generateDescOrderedArray(sizes[i], min, max);
-            InsertSort insertSort(arr, sizes[i]);
-            time = insertSort.sort();
-            this->avgTimeInsertSort[i] = (time + this->avgTimeInsertSort[i]) / (j + 1);
+            int *arr = generator.generateAscOrderedArray(sizes[i], min, max);
 
+            InsertSort insertSort(arr, sizes[i]);
+            double time = insertSort.sort();
+            this->avgTimeInsertSort[i] = (time + this->avgTimeInsertSort[i]) / (j + 1);
 
             HeapSort heapSort(arr, sizes[i]);
             time = heapSort.sort();
             this->avgTimeHeapSort[i] = (time + this->avgTimeHeapSort[i]) / (j + 1);
-
-//
-//            QuickSort2 quickSort2(arr, sizes[i], QuickSort2::LEFT);
-//            time = quickSort2.sort();
-//            this->avgTimeQuickSortLeft[i] = (time + this->avgTimeQuickSortLeft[i]) / (j + 1);
-
-//            QuickSort2 quickSort2Right(arr, sizes[i], QuickSort2::RIGHT);
-//            time = quickSort2Right.sort();
-//            this->avgTimeQuickSortRight[i] = (time + this->avgTimeQuickSortRight[i]) / (j + 1);
-//
-//            QuickSort2 quickSort2Center(arr, sizes[i], QuickSort2::CENTER);
-//            time = quickSort2Center.sort();
-//            this->avgTimeQuickSortCenter[i] = (time + this->avgTimeQuickSortCenter[i]) / (j + 1);
-//
-//            QuickSort2 quickSort2Random(arr, sizes[i], QuickSort2::RANDOM);
-//            time = quickSort2Random.sort();
-//            this->avgTimeQuickSortRandom[i] = (time + this->avgTimeQuickSortRandom[i]) / (j + 1);
-
 
             QuickSort quickSortLeft(arr, sizes[i], QuickSort::LEFT);
             time = quickSortLeft.sort();
@@ -50,19 +43,18 @@ void Simulator::simulate() {
             QuickSort quickSortRight(arr, sizes[i], QuickSort::RIGHT);
             time = quickSortRight.sort();
             this->avgTimeQuickSortRight[i] = (time + this->avgTimeQuickSortRight[i]) / (j + 1);
-//
-//            QuickSort quickSortCenter(arr, sizes[i], QuickSort::CENTER);
-//            time = quickSortCenter.sort();
-//            this->avgTimeQuickSortCenter[i] = (time + this->avgTimeQuickSortCenter[i]) / (j + 1);
-//
-//            QuickSort quickSortRandom(arr, sizes[i], QuickSort::RANDOM);
-//            time = quickSortRandom.sort();
-//            this->avgTimeQuickSortRandom[i] = (time + this->avgTimeQuickSortRandom[i]) / (j + 1);
-//
-            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::HIBBARD);
+
+            QuickSort quickSortCenter(arr, sizes[i], QuickSort::CENTER);
+            time = quickSortCenter.sort();
+            this->avgTimeQuickSortCenter[i] = (time + this->avgTimeQuickSortCenter[i]) / (j + 1);
+
+            QuickSort quickSortRandom(arr, sizes[i], QuickSort::RANDOM);
+            time = quickSortRandom.sort();
+            this->avgTimeQuickSortRandom[i] = (time + this->avgTimeQuickSortRandom[i]) / (j + 1);
+
+            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
             time = shellSortHibbard.sort();
             this->avgTimeShellSortHibbard[i] = (time + this->avgTimeShellSortHibbard[i]) / (j + 1);
-
 
             ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
             time = shellSortShell.sort();
@@ -71,9 +63,173 @@ void Simulator::simulate() {
     }
 }
 
+void Simulator::simulateForDesc() {
+    for (int i = 0; i < tableSize; i++) {
+        for (int j = 0; j < iterations; j++) {
+            int *arr = generator.generateDescOrderedArray(sizes[i], min, max);
+
+            InsertSort insertSort(arr, sizes[i]);
+            double time = insertSort.sort();
+            this->avgTimeInsertSort[i] = (time + this->avgTimeInsertSort[i]) / (j + 1);
+
+            HeapSort heapSort(arr, sizes[i]);
+            time = heapSort.sort();
+            this->avgTimeHeapSort[i] = (time + this->avgTimeHeapSort[i]) / (j + 1);
+
+            QuickSort quickSortLeft(arr, sizes[i], QuickSort::LEFT);
+            time = quickSortLeft.sort();
+            this->avgTimeQuickSortLeft[i] = (time + this->avgTimeQuickSortLeft[i]) / (j + 1);
+
+            QuickSort quickSortRight(arr, sizes[i], QuickSort::RIGHT);
+            time = quickSortRight.sort();
+            this->avgTimeQuickSortRight[i] = (time + this->avgTimeQuickSortRight[i]) / (j + 1);
+
+            QuickSort quickSortCenter(arr, sizes[i], QuickSort::CENTER);
+            time = quickSortCenter.sort();
+            this->avgTimeQuickSortCenter[i] = (time + this->avgTimeQuickSortCenter[i]) / (j + 1);
+
+            QuickSort quickSortRandom(arr, sizes[i], QuickSort::RANDOM);
+            time = quickSortRandom.sort();
+            this->avgTimeQuickSortRandom[i] = (time + this->avgTimeQuickSortRandom[i]) / (j + 1);
+
+            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortHibbard.sort();
+            this->avgTimeShellSortHibbard[i] = (time + this->avgTimeShellSortHibbard[i]) / (j + 1);
+
+            ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
+            time = shellSortShell.sort();
+            this->avgTimeShellSortShell[i] = (time + this->avgTimeShellSortShell[i]) / (j + 1);
+        }
+    }
+}
+
+void Simulator::simulateForRandom() {
+    for (int i = 0; i < tableSize; i++) {
+        for (int j = 0; j < iterations; j++) {
+            int *arr = generator.generateRandomArray(sizes[i], min, max);
+
+            InsertSort insertSort(arr, sizes[i]);
+            double time = insertSort.sort();
+            this->avgTimeInsertSort[i] = (time + this->avgTimeInsertSort[i]) / (j + 1);
+
+            HeapSort heapSort(arr, sizes[i]);
+            time = heapSort.sort();
+            this->avgTimeHeapSort[i] = (time + this->avgTimeHeapSort[i]) / (j + 1);
+
+            QuickSort quickSortLeft(arr, sizes[i], QuickSort::LEFT);
+            time = quickSortLeft.sort();
+            this->avgTimeQuickSortLeft[i] = (time + this->avgTimeQuickSortLeft[i]) / (j + 1);
+
+            QuickSort quickSortRight(arr, sizes[i], QuickSort::RIGHT);
+            time = quickSortRight.sort();
+            this->avgTimeQuickSortRight[i] = (time + this->avgTimeQuickSortRight[i]) / (j + 1);
+
+            QuickSort quickSortCenter(arr, sizes[i], QuickSort::CENTER);
+            time = quickSortCenter.sort();
+            this->avgTimeQuickSortCenter[i] = (time + this->avgTimeQuickSortCenter[i]) / (j + 1);
+
+            QuickSort quickSortRandom(arr, sizes[i], QuickSort::RANDOM);
+            time = quickSortRandom.sort();
+            this->avgTimeQuickSortRandom[i] = (time + this->avgTimeQuickSortRandom[i]) / (j + 1);
+
+            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortHibbard.sort();
+            this->avgTimeShellSortHibbard[i] = (time + this->avgTimeShellSortHibbard[i]) / (j + 1);
+
+            ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
+            time = shellSortShell.sort();
+            this->avgTimeShellSortShell[i] = (time + this->avgTimeShellSortShell[i]) / (j + 1);
+        }
+    }
+}
+
+void Simulator::simulateForPartlyOrdered() {
+    for (int i = 0; i < tableSize; i++) {
+        for (int j = 0; j < iterations; j++) {
+            int *arr = generator.generatePartlyOrderedArray(sizes[i], min, max);
+
+            InsertSort insertSort(arr, sizes[i]);
+            double time = insertSort.sort();
+            this->avgTimeInsertSort[i] = (time + this->avgTimeInsertSort[i]) / (j + 1);
+
+            HeapSort heapSort(arr, sizes[i]);
+            time = heapSort.sort();
+            this->avgTimeHeapSort[i] = (time + this->avgTimeHeapSort[i]) / (j + 1);
+
+            QuickSort quickSortLeft(arr, sizes[i], QuickSort::LEFT);
+            time = quickSortLeft.sort();
+            this->avgTimeQuickSortLeft[i] = (time + this->avgTimeQuickSortLeft[i]) / (j + 1);
+
+            QuickSort quickSortRight(arr, sizes[i], QuickSort::RIGHT);
+            time = quickSortRight.sort();
+            this->avgTimeQuickSortRight[i] = (time + this->avgTimeQuickSortRight[i]) / (j + 1);
+
+            QuickSort quickSortCenter(arr, sizes[i], QuickSort::CENTER);
+            time = quickSortCenter.sort();
+            this->avgTimeQuickSortCenter[i] = (time + this->avgTimeQuickSortCenter[i]) / (j + 1);
+
+            QuickSort quickSortRandom(arr, sizes[i], QuickSort::RANDOM);
+            time = quickSortRandom.sort();
+            this->avgTimeQuickSortRandom[i] = (time + this->avgTimeQuickSortRandom[i]) / (j + 1);
+
+            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortHibbard.sort();
+            this->avgTimeShellSortHibbard[i] = (time + this->avgTimeShellSortHibbard[i]) / (j + 1);
+
+            ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
+            time = shellSortShell.sort();
+            this->avgTimeShellSortShell[i] = (time + this->avgTimeShellSortShell[i]) / (j + 1);
+        }
+    }
+}
+
+void Simulator::simulateForFloat() {
+    double avgTimeQuickSortFloat[tableSize];
+    double avgTimeQuickSort[tableSize];
+    for (int i = 0; i < tableSize; i++) {
+        avgTimeQuickSortFloat[i] = 0;
+        avgTimeQuickSort[i] = 0;
+    }
+
+    for (int i = 0; i < tableSize; i++) {
+        for (int j = 0; j < iterations; j++) {
+            float *arrFloat = generator.generateRandomFloatArray(sizes[i], min, max);
+            int *arrInt = generator.generateRandomArray(sizes[i], min, max);
+
+            QuickSort quickSortRightInt(arrInt, sizes[i], QuickSort::RIGHT);
+            double time = quickSortRightInt.sort();
+            avgTimeQuickSort[i] = (time + avgTimeQuickSort[i]) / (j + 1);
+
+            QuickSort quickSortRight(arrFloat, sizes[i], QuickSort::RIGHT);
+            time = quickSortRight.sortFloat();
+            avgTimeQuickSortFloat[i] = (time + avgTimeQuickSortFloat[i]) / (j + 1);
+        }
+    }
+
+    cout << "\n";
+    cout << setw(9) << "n |";
+    cout << setw(16) << "FLOAT |";
+    cout << setw(16) << "INT |";
+    cout << endl;
+    cout << "--------|";
+    for (int i = 0; i <= 1; ++i) {
+        cout << "---------------|";
+    }
+    cout << endl;
+
+    for (int i = 0; i < tableSize; i++) {
+        cout << setw(7) << sizes[i] << " |";
+        cout << fixed << setprecision(3);
+        cout << setw(14) << avgTimeQuickSortFloat[i] << " |";
+        cout << setw(14) << avgTimeQuickSort[i] << " |";
+        cout << endl;
+    }
+
+}
 
 
-void Simulator::displayTable(){
+void Simulator::displayTable() {
+    cout << "\n";
     cout << setw(9) << "n |";
     cout << setw(16) << "INSERT |";
     cout << setw(16) << "HEAP |";
@@ -93,6 +249,7 @@ void Simulator::displayTable(){
 
     for (int i = 0; i < tableSize; i++) {
         cout << setw(7) << sizes[i] << " |";
+        cout << fixed << setprecision(3);
         cout << setw(14) << avgTimeInsertSort[i] << " |";
         cout << setw(14) << avgTimeHeapSort[i] << " |";
         cout << setw(14) << avgTimeQuickSortLeft[i] << " |";

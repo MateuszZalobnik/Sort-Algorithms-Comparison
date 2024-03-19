@@ -20,7 +20,5 @@ add_executable(AiZO1 main.cpp
         Sorters/ShellSort.h
         Simulator/Simulator.cpp
         Simulator/Simulator.h
-        Sorters/QuickSort2.cpp
-        Sorters/QuickSort2.h
         Test/Test.cpp
         Test/Test.h)

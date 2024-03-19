@@ -20,6 +20,8 @@ public:
     int* generateAscOrderedArray(int size, int min, int max);
     // generowanie tablicy częsciowa uporządkowanych liczb
     int* generatePartlyOrderedArray(int size, int min, int max);
+    // generowanie tablicy losowych liczb zmiennoprzecinkowych
+    float* generateRandomFloatArray(int size, int min, int max);
 };
 
 

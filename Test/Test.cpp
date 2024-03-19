@@ -84,11 +84,11 @@ void Test::menu() {
         cout << "Wybierz opcje: ";
         cin >> choice;
 
-        if (cin.fail()) { // Sprawdź, czy wczytanie operacji się nie powiodło
-            cin.clear(); // Wyczyść flagi błędu strumienia wejścia
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Odrzuć błędne wejście
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Niepoprawna opcja. Wybierz ponownie." << endl;
-            continue; // Kontynuuj pętlę, aby użytkownik mógł ponownie wybrać opcję
+            continue;
         }
 
         switch (choice) {
@@ -129,7 +129,7 @@ void Test::sortingMenu() {
         cout << "5. Sortowanie szybkie - pivot losowy\n";
         cout << "6. Sortowanie przez kopcowanie\n";
         cout << "7. Sortowanie Shella - n/2^k\n";
-        cout << "8. Sortowanie Shella - 2^k - 1\n";
+        cout << "8. Sortowanie Shella - 4^k * 3*2^(k-1) + 1\n";
         cout << "9. Wyjdz\n";
         cout << "Wybierz opcje: ";
         cin >> choice;
@@ -177,7 +177,7 @@ void Test::sortingMenu() {
             this->TempArr = shellSort.TempArr;
             afterSortingMenu();
         } else if (choice == 8) {
-            ShellSort shellSort(arr, length, ShellSort::HIBBARD);
+            ShellSort shellSort(arr, length, ShellSort::SEDGEWICK);
             shellSort.sort();
             this->TempArr = shellSort.TempArr;
             afterSortingMenu();

@@ -46,3 +46,13 @@ int *Generator::generatePartlyOrderedArray(int size, int min, int max) {
     }
     return arr;
 }
+
+float *Generator::generateRandomFloatArray(int size, int min, int max) {
+    float *arr = new float[size];
+    float test [size];
+    for (int i = 0; i < size; i++) {
+        arr[i] = (float)rand() / (float)RAND_MAX * (max - min) + min;
+        test[i] = arr[i];
+    }
+    return arr;
+}

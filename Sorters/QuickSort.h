@@ -16,12 +16,16 @@ public:
 private:
     enum PivotType pivotType;
     int *arr;
+    float *floatArr;
     int size;
     int partition(int left, int right);
     void quickSort(int left, int right);
+    void quickSortFloat(int left, int right);
+    int partitionFloat(int left, int right);
     void displayData();
 public:
     int *TempArr;
+    float *floatTempArr;
     QuickSort(int *arr, int size, PivotType pivotType) {
         this->pivotType = pivotType;
         this->arr = arr;
@@ -32,7 +36,18 @@ public:
         }
     }
 
+    QuickSort(float *arr, int size, PivotType pivotType) {
+        this->pivotType = pivotType;
+        this->floatArr = arr;
+        this->size = size;
+        floatTempArr = new float[size];
+        for (int l = 0; l < size; l++) {
+            floatTempArr[l] = arr[l];
+        }
+    }
+
     double sort();
+    double sortFloat();
 };
 
 

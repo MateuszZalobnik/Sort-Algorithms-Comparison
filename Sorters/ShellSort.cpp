@@ -10,18 +10,30 @@ double ShellSort::sort() {
         // O(n^2)
         int gap = size / 2;
         while(gap > 0){
+            // sortujemy przez wstawianie z odstępem
             insertSortWithGap(gap);
             gap /= 2;
         }
-    } else if(gapType == HIBBARD){
-        // 2^k - 1
-        // O(n^(3/2))
-        int k = 1;
-        int gap = 1;
+    } else if (gapType == SEDGEWICK) {
+        // 4^k + 3*2^(k-1) + 1
+        // O(n^(4/3))
+        int distances [size];
+        int k = 0;
+        // tworzymy tablicę odległości
+        int gap = pow(4, k) + 3 * pow(2, k - 1) + 1;
         while(gap < size){
-            gap = std::pow(2, k) - 1;
+            if(k == 0){
+                distances[k] = 1;
+            }else{
+                distances[k] = gap;
+                gap = pow(4, k) + 3 * pow(2, k - 1) + 1;
+            }
             k++;
-            insertSortWithGap(gap);
+        }
+
+        for(int i = k - 1; i >= 0; i--){
+            // sortujemy przez wstawianie z odstępem
+            insertSortWithGap(distances[i]);
         }
     }
 
@@ -31,7 +43,7 @@ double ShellSort::sort() {
 }
 
 void ShellSort::insertSortWithGap(int gap) {
-    for (int i = gap; i < size; i += 1) {
+    for (int i = gap; i < size; i++) {
         int temp = TempArr[i];
         int j;
         for (j = i; j >= gap && TempArr[j - gap] > temp; j -= gap) {

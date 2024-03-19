@@ -3,39 +3,40 @@
 #include "Test/Test.h"
 
 using namespace std;
+
 int menu();
-void simulate();
-
-
 
 int main() {
-//    int choice = menu();
+    int choice;
 
-Test test;
-test.menu();
+    do {
+        cout << "Menu:" << endl;
+        cout << "1. Symulacja 1" << endl;
+        cout << "2. Test 2" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Wybierz: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> choice;
 
+        if (cin.fail()) {
+            cout << "Wprowadź numer." << endl;
+            continue;
+        }
 
-//Simulator simulator;
-//simulator.simulate();
-//simulator.displayArray();
-//    int choice = 1;
-//    if(choice == 1){
-//        simulate();
-//    } else if(choice == 2){
-//        cout << "Testowanie\n";
-//    }
+        if (choice == 1) {
+             Simulator simulator;
+             simulator.simulate();
+        } else if (choice == 2) {
+             Test test;
+             test.menu();
+        } else if (choice == 3) {
+            cout << "Exiting..." << endl;
+        } else {
+            cout << "Zły wybór." << endl;
+        }
+
+    } while (choice != 3);
 
     return 0;
-}
-
-
-int menu ()
-{
-    int choice;
-    cout << "1. Symulacja\n";
-    cout << "2. Testowanie\n";
-    cout << "3. Wyjscie\n";
-    cout << "Wybierz opcje: ";
-    cin >> choice;
-    return choice;
 }

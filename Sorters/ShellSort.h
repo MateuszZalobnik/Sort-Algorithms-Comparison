@@ -12,7 +12,7 @@ class ShellSort {
 public:
     enum GapType {
         SHELL,
-        HIBBARD,
+        SEDGEWICK,
     };
 private:
     enum GapType gapType;
