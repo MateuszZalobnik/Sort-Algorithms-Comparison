@@ -13,15 +13,15 @@ public:
     };
 
     // generowanie tablicy losowych liczb
-    int* generateRandomArray(int size, int min, int max);
+    int* generateRandomArray(int size);
     // generowanie tablicy uporządkowanych liczb rosnąco
-    int* generateDescOrderedArray(int size, int min, int max);
+    int* generateDescOrderedArray(int size);
     // generowanie tablicy uporządkowanych liczb malejąco
-    int* generateAscOrderedArray(int size, int min, int max);
+    int* generateAscOrderedArray(int size);
     // generowanie tablicy częsciowa uporządkowanych liczb
-    int* generatePartlyOrderedArray(int size, int min, int max);
+    int* generatePartlyOrderedArray(int size);
     // generowanie tablicy losowych liczb zmiennoprzecinkowych
-    float* generateRandomFloatArray(int size, int min, int max);
+    float* generateRandomFloatArray(int size);
 };
 
 

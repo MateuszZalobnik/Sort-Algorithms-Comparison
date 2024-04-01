@@ -24,22 +24,14 @@ void Test::checkIsSorted() {
 }
 
 void Test::generateArr() {
-    int min, max;
     cout << endl;
     cout << "Generowanie tablicy";
     cout << endl;
     cout << "Podaj dlugosc tablicy: ";
     cin >> length;
 
-    cout << endl;
-    cout << "Podaj minimalna wartosc: ";
-    cin >> min;
-
-    cout << endl;
-    cout << "Podaj maksymalna wartosc: ";
-    cin >> max;
     arr = new int[length];
-    arr = generator.generateRandomArray(length, min, max);
+    arr = generator.generateRandomArray(length);
     cout << endl;
     cout << "Tablica wygenerowana\n";
 }

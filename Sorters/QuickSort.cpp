@@ -8,6 +8,7 @@ double QuickSort::sort() {
 
     double time = counter.GetCounter();
     Checker::IsSorted(TempArr, size);
+    delete(TempArr);
     return time;
 }
 
@@ -36,7 +37,7 @@ int QuickSort::partition(int left, int right) {
         std::swap(TempArr[index], TempArr[right]);
     } else if (pivotType == CENTER) {
         // pivot jako środkowy element
-        int middle = (left + right) / 2; // Initialize 'middle' here
+        int middle = (left + right) / 2;
         pivot = TempArr[middle];
         std::swap(TempArr[middle], TempArr[right]);
     }

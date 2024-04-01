@@ -51,6 +51,7 @@ double HeapSort::sort() {
 
     double time = counter.GetCounter();
     Checker::IsSorted(TempArr, size);
+    delete(TempArr);
     return time;
 }
 

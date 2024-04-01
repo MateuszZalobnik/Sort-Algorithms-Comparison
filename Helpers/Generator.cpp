@@ -1,18 +1,18 @@
 #include "Generator.h"
 
-int *Generator::generateRandomArray(int size, int min, int max) {
+int *Generator::generateRandomArray(int size) {
     int *arr = new int[size];
     for (int i = 0; i < size; i++) {
-        arr[i] = rand() % max + min;
+        arr[i] = rand() % INT_MAX + INT_MIN;
     }
     return arr;
 }
 
-int *Generator::generateDescOrderedArray(int size, int min, int max) {
+int *Generator::generateDescOrderedArray(int size) {
     int *arr = new int[size];
     for (int i = 0; i < size; i++) {
-        if(i >= max){
-            arr[i] = max;
+        if(i >= INT_MAX){
+            arr[i] = INT_MAX;
         } else {
             arr[i] = i;
         }
@@ -20,11 +20,11 @@ int *Generator::generateDescOrderedArray(int size, int min, int max) {
     return arr;
 }
 
-int *Generator::generateAscOrderedArray(int size, int min, int max) {
+int *Generator::generateAscOrderedArray(int size) {
     int *arr = new int[size];
     for (int i = 0; i < size; i++) {
-        if (size - i >= max) {
-            arr[i] = max;
+        if (size - i >= INT_MAX) {
+            arr[i] = INT_MAX;
         } else {
             arr[i] = size - i;
         }
@@ -32,26 +32,26 @@ int *Generator::generateAscOrderedArray(int size, int min, int max) {
     return arr;
 }
 
-int *Generator::generatePartlyOrderedArray(int size, int min, int max) {
+int *Generator::generatePartlyOrderedArray(int size) {
     int *arr = new int[size];
     for (int i = 0; i < size; i++) {
-        if (i >= max) {
-            arr[i] = max;
+        if (i >= INT_MAX) {
+            arr[i] = INT_MAX;
         } else {
             arr[i] = i;
         }
     }
     for (int i = 0; i < size / 3; i++) {
-        arr[i] = rand() % max + min;
+        arr[i] = rand() % INT_MAX + INT_MIN;
     }
     return arr;
 }
 
-float *Generator::generateRandomFloatArray(int size, int min, int max) {
+float *Generator::generateRandomFloatArray(int size) {
     float *arr = new float[size];
     float test [size];
     for (int i = 0; i < size; i++) {
-        arr[i] = (float)rand() / (float)RAND_MAX * (max - min) + min;
+        arr[i] = (float)rand() / (float)RAND_MAX;
         test[i] = arr[i];
     }
     return arr;
