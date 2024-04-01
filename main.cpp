@@ -6,6 +6,7 @@ using namespace std;
 
 int menu();
 
+
 int main() {
     int choice;
 
@@ -23,7 +24,6 @@ int main() {
             cout << "Wprowadź numer." << endl;
             continue;
         }
-
         if (choice == 1) {
              Simulator simulator;
              simulator.simulate();
