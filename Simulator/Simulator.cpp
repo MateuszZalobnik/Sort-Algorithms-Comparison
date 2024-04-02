@@ -55,9 +55,9 @@ void Simulator::simulateForAsc() {
             time = quickSortRandom.sort();
             this->avgTimeQuickSortRandom[i] = time;
 
-            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
-            time = shellSortHibbard.sort();
-            this->avgTimeShellSortHibbard[i] = time;
+            ShellSort shellSortSedgewick(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortSedgewick.sort();
+            this->avgTimeShellSortSedgewick[i] = time;
 
             ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
             time = shellSortShell.sort();
@@ -93,9 +93,9 @@ void Simulator::simulateForDesc() {
             time = quickSortRandom.sort();
             this->avgTimeQuickSortRandom[i] = time;
 
-            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
-            time = shellSortHibbard.sort();
-            this->avgTimeShellSortHibbard[i] = time;
+            ShellSort shellSortSedgewick(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortSedgewick.sort();
+            this->avgTimeShellSortSedgewick[i] = time;
 
             ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
             time = shellSortShell.sort();
@@ -132,9 +132,9 @@ void Simulator::simulateForRandom() {
             time = quickSortRandom.sort();
             this->avgTimeQuickSortRandom[i] += time;
 
-            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
-            time = shellSortHibbard.sort();
-            this->avgTimeShellSortHibbard[i] += time;
+            ShellSort shellSortSedgewick(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortSedgewick.sort();
+            this->avgTimeShellSortSedgewick[i] += time;
 
             ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
             time = shellSortShell.sort();
@@ -147,7 +147,7 @@ void Simulator::simulateForRandom() {
         this->avgTimeQuickSortRight[i] = this->avgTimeQuickSortRight[i] / iterations;
         this->avgTimeQuickSortCenter[i] = this->avgTimeQuickSortCenter[i] / iterations;
         this->avgTimeQuickSortRandom[i] = this->avgTimeQuickSortRandom[i] / iterations;
-        this->avgTimeShellSortHibbard[i] = this->avgTimeShellSortHibbard[i] / iterations;
+        this->avgTimeShellSortSedgewick[i] = this->avgTimeShellSortSedgewick[i] / iterations;
         this->avgTimeShellSortShell[i] = this->avgTimeShellSortShell[i] / iterations;
     }
 }
@@ -181,9 +181,9 @@ void Simulator::simulateForPartlyOrdered() {
             time = quickSortRandom.sort();
             this->avgTimeQuickSortRandom[i] += time;
 
-            ShellSort shellSortHibbard(arr, sizes[i], ShellSort::SEDGEWICK);
-            time = shellSortHibbard.sort();
-            this->avgTimeShellSortHibbard[i] += time;
+            ShellSort shellSortSedgewick(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortSedgewick.sort();
+            this->avgTimeShellSortSedgewick[i] += time;
 
             ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
             time = shellSortShell.sort();
@@ -195,7 +195,7 @@ void Simulator::simulateForPartlyOrdered() {
         this->avgTimeQuickSortRight[i] = this->avgTimeQuickSortRight[i] / iterations;
         this->avgTimeQuickSortCenter[i] = this->avgTimeQuickSortCenter[i] / iterations;
         this->avgTimeQuickSortRandom[i] = this->avgTimeQuickSortRandom[i] / iterations;
-        this->avgTimeShellSortHibbard[i] = this->avgTimeShellSortHibbard[i] / iterations;
+        this->avgTimeShellSortSedgewick[i] = this->avgTimeShellSortSedgewick[i] / iterations;
         this->avgTimeShellSortShell[i] = this->avgTimeShellSortShell[i] / iterations;
     }
 }
@@ -256,7 +256,7 @@ void Simulator::displayTable() {
     cout << setw(16) << "QUICK/RIGHT |";
     cout << setw(16) << "QUICK/CENTER |";
     cout << setw(16) << "QUICK/RANDOM |";
-    cout << setw(16) << "SHELL/HIBBARD |";
+    cout << setw(16) << "SHELL/SEDGEWICK |";
     cout << setw(16) << "SHELL/SHELL |";
 
     cout << endl;
@@ -275,7 +275,7 @@ void Simulator::displayTable() {
         cout << setw(14) << avgTimeQuickSortRight[i] << " |";
         cout << setw(14) << avgTimeQuickSortCenter[i] << " |";
         cout << setw(14) << avgTimeQuickSortRandom[i] << " |";
-        cout << setw(14) << avgTimeShellSortHibbard[i] << " |";
+        cout << setw(14) << avgTimeShellSortSedgewick[i] << " |";
         cout << setw(14) << avgTimeShellSortShell[i] << " |";
         cout << endl;
     }
@@ -284,7 +284,7 @@ void Simulator::displayTable() {
 void Simulator::resetTable() {
     for (int i = 0; i < tableSize; i++) {
         this->avgTimeShellSortShell[i] = 0;
-        this->avgTimeShellSortHibbard[i] = 0;
+        this->avgTimeShellSortSedgewick[i] = 0;
         this->avgTimeQuickSortLeft[i] = 0;
         this->avgTimeQuickSortRight[i] = 0;
         this->avgTimeQuickSortCenter[i] = 0;
