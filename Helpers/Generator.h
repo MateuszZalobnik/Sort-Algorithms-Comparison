@@ -19,7 +19,8 @@ public:
     // generowanie tablicy uporządkowanych liczb malejąco
     int* generateAscOrderedArray(int size);
     // generowanie tablicy częsciowa uporządkowanych liczb
-    int* generatePartlyOrderedArray(int size);
+    int* generate66PercentOrderedArray(int size);
+    int* generate33PercentOrderedArray(int size);
     // generowanie tablicy losowych liczb zmiennoprzecinkowych
     float* generateRandomFloatArray(int size);
 };

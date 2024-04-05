@@ -21,8 +21,13 @@ void Simulator::simulate() {
     displayTable();
     resetTable();
 
-    cout << "Symulacja dla tablic czesciowo posortowanych\n";
-    simulateForPartlyOrdered();
+    cout << "Symulacja dla tablic czesciowo posortowanych (66% początkowych)\n";
+    simulateFor66Ordered();
+    displayTable();
+    resetTable();
+
+    cout << "Symulacja dla tablic czesciowo posortowanych (33% początkowych)\n";
+    simulateFor33Ordered();
     displayTable();
     resetTable();
 }
@@ -104,8 +109,11 @@ void Simulator::simulateForDesc() {
 }
 
 void Simulator::simulateForRandom() {
+    cout << endl;
     for (int i = 0; i < tableSize; i++) {
         for (int j = 0; j < iterations; j++) {
+            cout << (i*10+j) << "-";
+
             int *arr = generator.generateRandomArray(sizes[i]);
 
             InsertSort insertSort(arr, sizes[i]);
@@ -150,12 +158,15 @@ void Simulator::simulateForRandom() {
         this->avgTimeShellSortSedgewick[i] = this->avgTimeShellSortSedgewick[i] / iterations;
         this->avgTimeShellSortShell[i] = this->avgTimeShellSortShell[i] / iterations;
     }
+    cout << endl;
 }
 
-void Simulator::simulateForPartlyOrdered() {
+void Simulator::simulateFor33Ordered() {
+    cout << endl;
     for (int i = 0; i < tableSize; i++) {
         for (int j = 0; j < iterations; j++) {
-            int *arr = generator.generatePartlyOrderedArray(sizes[i]);
+            cout << (i*10+j) << "-";
+            int *arr = generator.generate33PercentOrderedArray(sizes[i]);
 
             InsertSort insertSort(arr, sizes[i]);
             double time = insertSort.sort();
@@ -198,6 +209,59 @@ void Simulator::simulateForPartlyOrdered() {
         this->avgTimeShellSortSedgewick[i] = this->avgTimeShellSortSedgewick[i] / iterations;
         this->avgTimeShellSortShell[i] = this->avgTimeShellSortShell[i] / iterations;
     }
+    cout << endl;
+}
+
+
+void Simulator::simulateFor66Ordered() {
+            cout << endl;
+    for (int i = 0; i < tableSize; i++) {
+        for (int j = 0; j < iterations; j++) {
+            cout << (i*10+j) << "-";
+            int *arr = generator.generate66PercentOrderedArray(sizes[i]);
+
+            InsertSort insertSort(arr, sizes[i]);
+            double time = insertSort.sort();
+            this->avgTimeInsertSort[i] += time;
+
+            HeapSort heapSort(arr, sizes[i]);
+            time = heapSort.sort();
+            this->avgTimeHeapSort[i] += time;
+
+            QuickSort quickSortLeft(arr, sizes[i], QuickSort::LEFT);
+            time = quickSortLeft.sort();
+            this->avgTimeQuickSortLeft[i] += time;
+
+            QuickSort quickSortRight(arr, sizes[i], QuickSort::RIGHT);
+            time = quickSortRight.sort();
+            this->avgTimeQuickSortRight[i] += time;
+
+            QuickSort quickSortCenter(arr, sizes[i], QuickSort::CENTER);
+            time = quickSortCenter.sort();
+            this->avgTimeQuickSortCenter[i] += time;
+
+            QuickSort quickSortRandom(arr, sizes[i], QuickSort::RANDOM);
+            time = quickSortRandom.sort();
+            this->avgTimeQuickSortRandom[i] += time;
+
+            ShellSort shellSortSedgewick(arr, sizes[i], ShellSort::SEDGEWICK);
+            time = shellSortSedgewick.sort();
+            this->avgTimeShellSortSedgewick[i] += time;
+
+            ShellSort shellSortShell(arr, sizes[i], ShellSort::SHELL);
+            time = shellSortShell.sort();
+            this->avgTimeShellSortShell[i] += time;
+        }
+        this->avgTimeInsertSort[i] = this->avgTimeInsertSort[i] / iterations;
+        this->avgTimeHeapSort[i] = this->avgTimeHeapSort[i] / iterations;
+        this->avgTimeQuickSortLeft[i] = this->avgTimeQuickSortLeft[i] / iterations;
+        this->avgTimeQuickSortRight[i] = this->avgTimeQuickSortRight[i] / iterations;
+        this->avgTimeQuickSortCenter[i] = this->avgTimeQuickSortCenter[i] / iterations;
+        this->avgTimeQuickSortRandom[i] = this->avgTimeQuickSortRandom[i] / iterations;
+        this->avgTimeShellSortSedgewick[i] = this->avgTimeShellSortSedgewick[i] / iterations;
+        this->avgTimeShellSortShell[i] = this->avgTimeShellSortShell[i] / iterations;
+    }
+    cout << endl;
 }
 
 void Simulator::simulateForFloat() {

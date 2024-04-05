@@ -13,10 +13,9 @@ private:
     Generator generator;
     int min = INT_MIN;
     int max = INT_MAX;
-    int iterations = 10;
-    int tableSize = 4;
-    int sizes [4] = {1000, 2500, 4000, 5500};
-//    int sizes [7] = {10000, 25000, 40000, 55000, 70000, 85000, 100000};
+    int iterations = 100;
+    int tableSize = 7;
+    int sizes [7] = {10000, 20000, 30000, 40000, 50000, 60000, 70000};
     double avgTimeQuickSortLeft [7];
     double avgTimeQuickSortRight [7];
     double avgTimeQuickSortCenter [7];
@@ -28,7 +27,8 @@ private:
     void resetTable();
     void simulateForAsc();
     void simulateForDesc();
-    void simulateForPartlyOrdered();
+    void simulateFor66Ordered();
+    void simulateFor33Ordered();
     void simulateForRandom();
     void simulateForFloat();
 public:
